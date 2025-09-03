@@ -1,0 +1,23 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.ListaTarefas" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.ListaTarefas" parent="Base.Theme.ListaTarefas">
+
+    <item name="colorPrimary" type="color">@color/primaria</item>
+    <item name="colorPrimaryVariant" type="color">@color/primaria_variacao</item>
+    <item name="colorOnPrimary" type="color">@color/white</item>
+
+    <item name="colorSecondary" type="color">@color/secundaria</item>
+    <item name="colorSecondaryVariant" type="color">@color/secundaria_variacao</item>
+    <item name="colorOnSecondary" type="color">@color/black</item>
+
+    <item name="android:statusBarColor" type="color">@color/primaria</item>
+    <item name="android:windowBackground" type="color">@color/fundo</item>
+
+    </style>
+
+</resources>
