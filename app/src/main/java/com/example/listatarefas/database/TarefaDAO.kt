@@ -39,7 +39,28 @@ class TarefaDAO(context: Context): ITarefaDAO {
     }
 
     override fun listar(): List<Tarefa> {
-        TODO("Not yet implemented")
+
+        val listaTarefas = mutableListOf<Tarefa>()
+
+        val sql = "SELECT ${DatabaseHelper.ID_TAREFA}, ${DatabaseHelper.DESCRICAO}," +
+                " strftime('%d/%m/%Y %H:%M', ${DatabaseHelper.DATA}) ${DatabaseHelper.DATA}" +
+                " FROM ${DatabaseHelper.TABELA_TAREFAS}"
+
+        val cursor = leitura.rawQuery(sql, null)
+        val indexId = cursor.getColumnIndex(DatabaseHelper.ID_TAREFA)
+        val indexDescricao = cursor.getColumnIndex(DatabaseHelper.DESCRICAO)
+        val indexData = cursor.getColumnIndex(DatabaseHelper.DATA)
+
+        while (cursor.moveToNext()){
+            val id = cursor.getInt(indexId)
+            val descricao = cursor.getString(indexDescricao)
+            val data = cursor.getString(indexData)
+
+            listaTarefas.add(Tarefa(id, descricao, data))
+        }
+
+        return listaTarefas
+
     }
 
 }
