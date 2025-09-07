@@ -75,6 +75,13 @@ class AdicionarTarefaActivity : AppCompatActivity() {
         )
         val tarefaDAO = TarefaDAO(this)
         tarefaDAO.atualizar(tarefaAtualizar)
+        if (tarefaDAO.atualizar(tarefaAtualizar)){
+            Toast.makeText(
+                this,
+                "Tarefa atualizada com sucesso",
+                Toast.LENGTH_SHORT).show()
+            finish()
+        }
     }
 }
 
