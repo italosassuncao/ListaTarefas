@@ -21,6 +21,14 @@ class AdicionarTarefaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        // Recuperar tarefa
+        var tarefa: Tarefa? = null
+        val bundle = intent.extras
+        if (bundle != null) {
+            tarefa = bundle.getSerializable("tarefa") as Tarefa
+            binding.editTarefa.setText(tarefa.descricao)
+        }
+
         binding.buttonSalvar.setOnClickListener {
             if (binding.editTarefa.text.isNotEmpty()) {
                 val descricao = binding.editTarefa.text.toString()

@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         //Recycler View
-        tarefaAdapter = TarefaAdapter { id ->
-            confirmarExclusao(id)
-        }
+        tarefaAdapter = TarefaAdapter ({ id -> confirmarExclusao(id)},
+            { tarefa -> editar(tarefa)})
+
         binding.rvTarefas.adapter = tarefaAdapter
         binding.rvTarefas.layoutManager = LinearLayoutManager(this)
 
@@ -87,5 +87,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT).show()
         }
         alertBuilder.create().show()
+    }
+
+    private fun editar(tarefa: Tarefa) {
+        val intent = Intent(this, AdicionarTarefaActivity::class.java)
+        intent.putExtra("tarefa", tarefa)
+        startActivity(intent)
     }
 }
