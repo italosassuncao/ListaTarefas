@@ -35,7 +35,19 @@ class TarefaDAO(context: Context): ITarefaDAO {
     }
 
     override fun excluir(idTarefa: Int): Boolean {
-        TODO("Not yet implemented")
+        val args = arrayOf(idTarefa.toString())
+        try {
+            escrita.delete(
+                DatabaseHelper.TABELA_TAREFAS,
+                "${DatabaseHelper.ID_TAREFA} = ?",
+                args
+            )
+            Log.i("INFO_DB", "Sucesso ao excluir tarefa")
+        }catch (e: Exception){
+            Log.i("INFO_DB", "Erro ao excluir tarefa")
+            return false
+        }
+        return true
     }
 
     override fun listar(): List<Tarefa> {
