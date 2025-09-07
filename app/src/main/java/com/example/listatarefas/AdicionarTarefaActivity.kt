@@ -10,6 +10,7 @@ import com.example.listatarefas.database.TarefaDAO
 import com.example.listatarefas.databinding.ActivityAdicionarTarefaBinding
 import com.example.listatarefas.databinding.ActivityMainBinding
 import com.example.listatarefas.model.Tarefa
+import kotlin.toString
 
 class AdicionarTarefaActivity : AppCompatActivity() {
 
@@ -31,20 +32,11 @@ class AdicionarTarefaActivity : AppCompatActivity() {
 
         binding.buttonSalvar.setOnClickListener {
             if (binding.editTarefa.text.isNotEmpty()) {
-                val descricao = binding.editTarefa.text.toString()
-                val tarefa = Tarefa(
-                    -1,
-                    descricao,
-                    "default"
-                )
 
-                val tarefaDAO = TarefaDAO(this)
-                if(tarefaDAO.salvar(tarefa)){
-                    Toast.makeText(
-                        this,
-                        "Tarefa salva com sucesso",
-                        Toast.LENGTH_SHORT).show()
-                    finish()
+                if (tarefa != null){
+                    editar(tarefa)
+                }else{
+                    salvar()
                 }
 
             }else{
@@ -55,4 +47,37 @@ class AdicionarTarefaActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun salvar() {
+        val descricao = binding.editTarefa.text.toString()
+        val tarefa = Tarefa(
+            -1,
+            descricao,
+            "default"
+        )
+
+        val tarefaDAO = TarefaDAO(this)
+        if(tarefaDAO.salvar(tarefa)){
+            Toast.makeText(
+                this,
+                "Tarefa salva com sucesso",
+                Toast.LENGTH_SHORT).show()
+            finish()
+        }
+    }
+
+    private fun editar(tarefa: Tarefa) {
+        val descricao = binding.editTarefa.text.toString()
+        val tarefaAtualizar = Tarefa(
+            tarefa.idTarefa,
+            descricao,
+            "default"
+        )
+        val tarefaDAO = TarefaDAO(this)
+        tarefaDAO.atualizar(tarefaAtualizar)
+    }
 }
+
+
+
+
